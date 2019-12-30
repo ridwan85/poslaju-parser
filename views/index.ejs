@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <!--  SINGLE FILE -->
+    <form action="/upload" enctype="multipart/form-data" method="POST">
+      <input type="file" name="myFile" />
+      <input type="submit" value="Upload a file" />
+    </form>
+  </body>
+</html>
