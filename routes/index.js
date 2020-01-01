@@ -74,9 +74,9 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               "Content Description":
                 i["TICKET VARIANT"] + " " + i["T-SHIRT SIZE"] || "",
               "Value of goods(RM)": 1,
-              "Weight(Kg)*": "0.5",
+              "Weight(Kg)*": "0.2",
               "Send Method*": "drop off",
-              "Send Date*": "2019-12-30",
+              "Send Date*": "2020-01-02",
               "Sender Name": "Oh My Run Asia",
               "Sender Company": "",
               "Sender Phone*": "0173112801",
