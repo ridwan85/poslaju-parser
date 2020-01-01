@@ -21,7 +21,7 @@ router.get("/", function(req, res, next) {
   // xlsxParser.onFileSelection(req.file).then(data => {
   //   var parsedData = data;
   // });
-  res.render("index", { title: "Express" });
+  res.render("index", { title: "POSLAJU PARSER" });
 });
 
 router.post("/upload", upload.single("myFile"), (req, res, next) => {
