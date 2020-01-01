@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "~p@ssW0rd123",
-  database: "poslaju_parser"
+  database: "poslaju"
 });
 
 connection.connect(function(err) {
