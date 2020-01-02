@@ -113,7 +113,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               // res.send(xls);
 
               res.xls(
-                "data" + moment(date).format("DD-MM-YYYY-hh:ss") + ".xlsx",
+                "data-" + moment(date).format("DD-MM-YYYY HH:mm:ss") + ".xlsx",
                 poslaju
               );
               // return res.json(poslaju);
