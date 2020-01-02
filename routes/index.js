@@ -59,8 +59,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               address[3].replace(/[0-9]/g, "");
             }
             for (var k in address) {
-              address[k] =
-                address[k].charAt(0).toUpperCase() + address[k].substring(1);
+              address[k] = address[k].toUpperCase();
             }
             var poscode = parseInt(
               i["POSTCODE/ZIPCODE"].replace(/[^0-9\.]/g, ""),
@@ -70,7 +69,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
             var city, state;
 
             if (cityAndState.length > 0) {
-              city = cityAndState[0].city;
+              city = cityAndState[0].city.toUpperCase();
               state = cityAndState[0].state;
             }
             // console.log(u);
