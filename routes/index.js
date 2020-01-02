@@ -78,7 +78,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               "Value of goods(RM)": 1,
               "Weight(Kg)*": "0.2",
               "Send Method*": "drop off",
-              "Send Date*": moment(date).format("YYYY-MM-DD"),
+              "Send Date*": moment(date).format("DD/MM/YYYY"),
               "Sender Name": "Oh My Run Asia",
               "Sender Company": "",
               "Sender Phone*": "0173112801",
