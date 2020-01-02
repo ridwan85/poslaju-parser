@@ -14,9 +14,48 @@
     <p>4. Data will be automatically downloaded.</p>
 
     <!--  SINGLE FILE -->
-    <form action="/upload" enctype="multipart/form-data" method="POST">
+    <form
+      name="myForm"
+      action="/upload"
+      enctype="multipart/form-data"
+      method="POST"
+      onsubmit="return validateForm()"
+    >
+      <label for="">File name</label>
+      <br />
+      <input type="text" name="filename" placeholder="input file name" />
+      <br /><br />
+      <label for=""> Data source</label>
+      <br />
+      <select name="source" id="">
+        <option value="justrun">JustRunLah</option>
+        <option value="ticket2u">Ticket2U</option>
+      </select>
+      <br /><br />
+      <label for="">Select file</label>
+      <br />
       <input type="file" name="myFile" />
-      <input type="submit" value="Upload a file" />
+      <br />
+      <br />
+      <input
+        style="height:30px; width:50px;background-color:#990102; color:white;"
+        type="submit"
+        value="Submit"
+      />
     </form>
   </body>
+  <script>
+    function validateForm() {
+      var x = document.forms["myForm"]["filename"].value;
+      if (x == "") {
+        alert("File name must be filled out");
+        return false;
+      }
+      var x = document.forms["myForm"]["myFile"].value;
+      if (x == "") {
+        alert("File must be selected");
+        return false;
+      }
+    }
+  </script>
 </html>
