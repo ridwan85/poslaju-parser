@@ -73,9 +73,11 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               state = cityAndState[0].state;
             }
             // console.log(u);
-            poslaju.push(`POSLAJU
-            Bulk Upload Template
-            Max 50 Bookings Only! All fields are mandatory. Please ensure all information is correct.`);
+            poslaju.push({
+              "": `POSLAJU
+              Bulk Upload Template
+              Max 50 Bookings Only! All fields are mandatory. Please ensure all information is correct.`
+            });
             poslaju.push({
               No: u,
               "Parcel Content": "Fashion & Apparel - Sports",
