@@ -134,80 +134,74 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               u++;
               var address = i["Mailing address"];
 
-              if (i["Country of residence (label)"] != "Malaysia (FREE)")
-                continue;
+              if (i["Country of residence"] === "MY 0") {
+                if (address.indexOf(",") > -1) {
+                  address = address.replace(/\n/g, ",");
+                  address = address.split(",");
+                } else {
+                  address = address.replace(/\n/g, ",");
+                  address = address.split(",");
+                }
 
-              if (address.indexOf(",") > -1) {
-                address = address.replace(/\n/g, ",");
-                address = address.split(",");
-              } else {
-                console.log("##############");
-                console.log(address);
-                console.log("-------------");
-                address = address.replace(/\n/g, ",");
-                console.log(address);
-                console.log("##############");
-                address = address.split(",");
-                console.log(address);
+                // if (address[3]) {
+                //   address[3].replace(/[0-9]/g, "");
+                // }
+                for (var k in address) {
+                  address[k] = address[k].toUpperCase();
+                }
+                // var poscode = parseInt(
+                //   i["POSTCODE/ZIPCODE"].replace(/[^0-9\.]/g, ""),
+                //   10
+                // );
+                // var cityAndState = JSON.parse(await getCity(poscode));
+                // var city, state;
+
+                // if (cityAndState.length > 0) {
+                //   city = cityAndState[0].city.toUpperCase();
+                //   state = cityAndState[0].state;
+                // }
+                // console.log(u);
+                poslaju.push({
+                  No: u,
+                  "Parcel Content": "Fashion & Apparel - Sports",
+                  "Content Description":
+                    i["Entitlement (label)"].slice(0, -5) +
+                      " " +
+                      i["T-Shirt Size (label)"] || "",
+                  "Value of goods(RM)": 1,
+                  "Weight(Kg)*": "0.2",
+                  "Send Method*": "drop off",
+                  "Send Date*": moment(date).format("DD/MM/YYYY"),
+                  "Sender Name": "Oh My Run Asia",
+                  "Sender Company": "",
+                  "Sender Phone*": "0173112801",
+                  "Sender Email*": "support@ohmyrun.com",
+                  "Sender Address Line 1*": "F111, Block F3",
+                  "Sender Address Line 2*": "Apartment Saujana",
+                  "Sender Address Line 3": "Jalan PJU 10/1c",
+                  "Sender Address Line 4": "Damansara Damai",
+                  "Sender Postcode*": "47820",
+                  "Sender City": "Petaling Jaya",
+                  "Sender State": "SELANGOR",
+                  "Receiver Name": i["First Name"] + i["Last Name"],
+                  "Receiver Company": "",
+                  "Receiver Contact*": i["Phone number"],
+                  "Receiver Email": i["Email Address"],
+                  "Receiver Address Line 1*": address[0] || "",
+                  "Receiver Address Line 2": address[1] || "",
+                  "Receiver Address Line 3": address[2] || "",
+                  "Receiver Address Line 4": address[3] || "",
+                  "Receiver Postcode*": "",
+                  "Receiver City": address[4] || "",
+                  "Receiver State": address[5] || ""
+                });
               }
 
-              // if (address[3]) {
-              //   address[3].replace(/[0-9]/g, "");
-              // }
-              for (var k in address) {
-                address[k] = address[k].toUpperCase();
-              }
-              // var poscode = parseInt(
-              //   i["POSTCODE/ZIPCODE"].replace(/[^0-9\.]/g, ""),
-              //   10
-              // );
-              // var cityAndState = JSON.parse(await getCity(poscode));
-              // var city, state;
-
-              // if (cityAndState.length > 0) {
-              //   city = cityAndState[0].city.toUpperCase();
-              //   state = cityAndState[0].state;
-              // }
-              // console.log(u);
-              poslaju.push({
-                No: u,
-                "Parcel Content": "Fashion & Apparel - Sports",
-                "Content Description":
-                  i["Entitlement (label)"].slice(0, -5) +
-                    " " +
-                    i["T-Shirt Size (label)"] || "",
-                "Value of goods(RM)": 1,
-                "Weight(Kg)*": "0.2",
-                "Send Method*": "drop off",
-                "Send Date*": moment(date).format("DD/MM/YYYY"),
-                "Sender Name": "Oh My Run Asia",
-                "Sender Company": "",
-                "Sender Phone*": "0173112801",
-                "Sender Email*": "support@ohmyrun.com",
-                "Sender Address Line 1*": "F111, Block F3",
-                "Sender Address Line 2*": "Apartment Saujana",
-                "Sender Address Line 3": "Jalan PJU 10/1c",
-                "Sender Address Line 4": "Damansara Damai",
-                "Sender Postcode*": "47820",
-                "Sender City": "Petaling Jaya",
-                "Sender State": "SELANGOR",
-                "Receiver Name": i["First Name"] + i["Last Name"],
-                "Receiver Company": "",
-                "Receiver Contact*": i["Phone number"],
-                "Receiver Email": i["Email Address"],
-                "Receiver Address Line 1*": address[0] || "",
-                "Receiver Address Line 2": address[1] || "",
-                "Receiver Address Line 3": address[2] || "",
-                "Receiver Address Line 4": address[3] || "",
-                "Receiver Postcode*": "",
-                "Receiver City": address[4] || "",
-                "Receiver State": address[5] || ""
-              });
               var d = result.length - 1;
               if (u === d) {
                 var json2xls = require("json2xls");
 
-                // return res.json(poslaju);
+                return res.json(poslaju);
                 res.xls(
                   filename +
                     "-" +
