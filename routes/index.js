@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var xlsxParser = require("xls-parser");
 const multer = require("multer");
-const moment = require("moment");
+const moment = require("moment-timezone");
 var sql = require("../db.js");
 
 // SET STORAGE
@@ -113,7 +113,11 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               // res.send(xls);
 
               res.xls(
-                "data-" + moment(date).format("DD-MM-YYYY HH:mm:ss") + ".xlsx",
+                "data-" +
+                  moment(date)
+                    .tz("Asia/Kuala_Lumpur")
+                    .format("DD-MM-YYYY HH:mm:ss") +
+                  ".xlsx",
                 poslaju
               );
               // return res.json(poslaju);
