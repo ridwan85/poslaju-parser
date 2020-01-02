@@ -204,7 +204,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               if (u === d) {
                 var json2xls = require("json2xls");
 
-                return res.json(poslaju);
+                // return res.json(poslaju);
                 res.xls(
                   filename +
                     "-" +
