@@ -134,6 +134,9 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               u++;
               var address = i["Mailing address"];
 
+              if (i["Country of residence (label)"] != "Malaysia (FREE)")
+                continue;
+
               if (address.indexOf(",") > -1) {
                 address = address.replace(/\n/g, ",");
                 address = address.split(",");
