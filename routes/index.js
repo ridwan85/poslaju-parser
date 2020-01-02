@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var xlsxParser = require("xls-parser");
 const multer = require("multer");
+const moment = require("moment");
 var sql = require("../db.js");
 
 // SET STORAGE
@@ -62,10 +63,11 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               10
             );
             var cityAndState = JSON.parse(await getCity(poscode));
-            var city;
+            var city, state;
 
             if (cityAndState.length > 0) {
               city = cityAndState[0].city;
+              state = cityAndState[0].state;
             }
             // console.log(u);
             poslaju.push({
@@ -76,18 +78,18 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               "Value of goods(RM)": 1,
               "Weight(Kg)*": "0.2",
               "Send Method*": "drop off",
-              "Send Date*": "2020-01-02",
+              "Send Date*": moment(date).format("YYYY-MM-DD"),
               "Sender Name": "Oh My Run Asia",
               "Sender Company": "",
               "Sender Phone*": "0173112801",
               "Sender Email*": "support@ohmyrun.com",
-              "Sender Address Line 1*": "F111",
+              "Sender Address Line 1*": "F111, Block F3",
               "Sender Address Line 2*": "Apartment Saujana",
               "Sender Address Line 3": "Jalan PJU 10/1c",
               "Sender Address Line 4": "Damansara Damai",
               "Sender Postcode*": "47820",
               "Sender City": "Petaling Jaya",
-              "Sender State": "Selangor",
+              "Sender State": "SELANGOR",
               "Receiver Name": i["FULL NAME"],
               "Receiver Company": "",
               "Receiver Contact*": i["MOBILE NUMBER"],
@@ -98,7 +100,7 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               "Receiver Address Line 4": address[3] || "",
               "Receiver Postcode*": poscode,
               "Receiver City": city || "",
-              "Receiver State": address[4] || ""
+              "Receiver State": state || ""
             });
             var d = result.length - 1;
             if (u === d) {
