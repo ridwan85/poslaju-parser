@@ -59,7 +59,8 @@ router.post("/upload", upload.single("myFile"), (req, res, next) => {
               address[3].replace(/[0-9]/g, "");
             }
             for (var k in address) {
-              address[k] = address[k].toUpperCase();
+              address[k] =
+                address[k].charAt(0).toUpperCase() + address[k].substring(1);
             }
             var poscode = parseInt(
               i["POSTCODE/ZIPCODE"].replace(/[^0-9\.]/g, ""),
